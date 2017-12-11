@@ -1,10 +1,10 @@
 {
   "name": "nuban",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Helper library when working with nuban accounts",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test.js"
   },
   "repository": {
     "type": "git",
