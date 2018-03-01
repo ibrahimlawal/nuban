@@ -1,31 +1,37 @@
 var NubanValidationError = require('./errors/nubanValidationError');
 
-module.exports = {
-    validateBankCode: function(bankCode){
-        return /^[0-9]{3}$/.test(''+bankCode);
-    },
-    regexValidAccount: function(accountNumber){
-        return /^[0-9]{10}$/.test(''+accountNumber);
-    },
-    regexValidFirst9: function(accountNumber){
-        return /^[0-9]{9}$/.test(''+accountNumber);
-    },
-    validateAccountNumber: function(accountNumber, bankCode){
-        return this.regexValidAccount(accountNumber) && this.validateBankCode(bankCode) && checkCheckDigit(''+accountNumber,''+bankCode);
-    },
-    validate: function(accountNumber, bankCode){
-        return this.validateAccountNumber(accountNumber, bankCode);
-    },
-    calculateCheckDigit: function(first9, bankCode){
-        if(!this.regexValidFirst9(first9)){
-            throw new NubanValidationError('' + first9 + ' is not a valid first 9 digits');
-        }
-        if(!this.validateBankCode(bankCode)){
-            throw new NubanValidationError('' + bankCode + ' is not a valid bank code');
-        }
-        return calculateCheckDigitFor('' + bankCode + first9);
-    }
+const validateBankCode = function(bankCode){
+    return /^[0-9]{3}$/.test(''+bankCode);
 };
+const regexValidAccount = function(accountNumber){
+    return /^[0-9]{10}$/.test(''+accountNumber);
+};
+const regexValidFirst9 = function(accountNumber){
+    return /^[0-9]{9}$/.test(''+accountNumber);
+};
+const validateAccountNumber = function(accountNumber, bankCode){
+    return regexValidAccount(accountNumber) && validateBankCode(bankCode) && checkCheckDigit(''+accountNumber,''+bankCode);
+};
+const validate = function(accountNumber, bankCode){
+    return functions.validateAccountNumber(accountNumber, bankCode);
+};
+const calculateCheckDigit = function(first9, bankCode){
+    if(!regexValidFirst9(first9)){
+        throw new NubanValidationError('' + first9 + ' is not a valid first 9 digits');
+    }
+    if(!validateBankCode(bankCode)){
+        throw new NubanValidationError('' + bankCode + ' is not a valid bank code');
+    }
+    return calculateCheckDigitFor('' + bankCode + first9);
+};
+functions = {
+    validateBankCode: validateBankCode,
+    calculateCheckDigit: calculateCheckDigit,
+    validate: validate,
+    validateAccountNumber: validateAccountNumber,
+};
+
+module.exports = functions;
 
 function checkCheckDigit(accountNumber, bankCode){
     var checkDigit = parseInt(accountNumber.charAt(9));

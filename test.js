@@ -1,7 +1,12 @@
 var nuban = require('./index');
 
-var shouldnotbevalid = nuban.validate("0123456789","011");
+const { validateAccountNumber } = require("./index");
+
+
+
+var shouldnotbevalid = validateAccountNumber("0123456789","011");
 var shouldbevalid = nuban.validate("0123456784","011");
+
 
 var checkDigit = null;
 var err1 = null;
@@ -31,6 +36,7 @@ if(shouldbevalid !== true){
 
 if(err1 !== null){
     console.log("Test for valid calculateCheckDigit parameters failed");
+    console.error(err1);
     process.exit(1);
 }
 
@@ -48,3 +54,5 @@ if(err2 === null){
     console.log("Test for invalid calculateCheckDigit parameters failed");
     process.exit(1);
 }
+
+console.log("ok");
