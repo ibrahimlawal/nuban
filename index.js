@@ -1,3 +1,5 @@
+'use strict';
+
 var NubanValidationError = require('./errors/nubanValidationError');
 
 const validateBankCode = function(bankCode){
@@ -24,7 +26,7 @@ const calculateCheckDigit = function(first9, bankCode){
     }
     return calculateCheckDigitFor('' + bankCode + first9);
 };
-functions = {
+const functions = {
     validateBankCode: validateBankCode,
     calculateCheckDigit: calculateCheckDigit,
     validate: validate,
