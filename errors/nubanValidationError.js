@@ -1,8 +1,8 @@
-function NubanValidationError(message) {
-    this.name = 'NubanValidationError';
-    this.message = message;
-    this.stack = (new Error()).stack;
+class NubanValidationError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = 'NubanValidationError';
+    }
 }
-NubanValidationError.prototype = new Error;
 
 module.exports = NubanValidationError;
