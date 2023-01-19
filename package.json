@@ -1,6 +1,6 @@
 {
   "name": "nuban",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Helper library when working with nuban accounts",
   "main": "index.js",
   "scripts": {
